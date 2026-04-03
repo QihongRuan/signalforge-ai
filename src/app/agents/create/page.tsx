@@ -24,6 +24,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function AgentBuilder() {
   const [selectedAsset, setSelectedAsset] = useState("");
@@ -200,13 +201,14 @@ export default function AgentBuilder() {
             </div>
 
             {/* Create Button */}
-            <button
+            <Button
               onClick={handleCreate}
+              size="lg"
               className={cn(
-                "w-full py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 transition-all",
+                "w-full py-3 rounded-lg font-semibold text-sm",
                 created
-                  ? "bg-bullish text-white"
-                  : "bg-accent hover:bg-accent/90 text-white"
+                  ? "bg-bullish text-white hover:bg-bullish/90"
+                  : "bg-primary text-primary-foreground hover:bg-primary/90"
               )}
             >
               {created ? (
@@ -220,7 +222,7 @@ export default function AgentBuilder() {
                   Create Agent
                 </>
               )}
-            </button>
+            </Button>
           </div>
         </div>
 

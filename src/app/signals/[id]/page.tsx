@@ -26,7 +26,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function formatPrice(price: number): string {
   if (price < 10) return price.toFixed(4);
@@ -63,7 +63,12 @@ const directionConfig = {
 
 export default function SignalDetail() {
   const params = useParams();
+  const [mounted, setMounted] = useState(false);
   const signal = signals.find((s) => s.id === params.id);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const chartData = useMemo(
     () =>
@@ -176,82 +181,86 @@ export default function SignalDetail() {
               Price Action (48h)
             </h3>
             <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData}>
-                  <defs>
-                    <linearGradient
-                      id="chartGrad"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor={dir.stroke}
-                        stopOpacity={0.2}
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor={dir.stroke}
-                        stopOpacity={0}
-                      />
-                    </linearGradient>
-                  </defs>
-                  <XAxis
-                    dataKey="time"
-                    tick={{ fontSize: 10, fill: "#6b7280" }}
-                    tickLine={false}
-                    axisLine={false}
-                    interval={7}
-                  />
-                  <YAxis
-                    domain={["auto", "auto"]}
-                    tick={{ fontSize: 10, fill: "#6b7280" }}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(v: number) =>
-                      v < 10 ? v.toFixed(3) : v.toLocaleString()
-                    }
-                    width={65}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#1a1d27",
-                      border: "1px solid #2a2e3a",
-                      borderRadius: "8px",
-                      fontSize: "12px",
-                    }}
-                    labelStyle={{ color: "#6b7280" }}
-                    itemStyle={{ color: "#e5e7eb" }}
-                  />
-                  <ReferenceLine
-                    y={signal.entryPrice}
-                    stroke="#3b82f6"
-                    strokeDasharray="4 4"
-                    strokeWidth={1}
-                  />
-                  <ReferenceLine
-                    y={signal.targetPrice}
-                    stroke="#22c55e"
-                    strokeDasharray="4 4"
-                    strokeWidth={1}
-                  />
-                  <ReferenceLine
-                    y={signal.stopLoss}
-                    stroke="#ef4444"
-                    strokeDasharray="4 4"
-                    strokeWidth={1}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="price"
-                    stroke={dir.stroke}
-                    strokeWidth={2}
-                    fill="url(#chartGrad)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
+              {mounted ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={chartData}>
+                    <defs>
+                      <linearGradient
+                        id="chartGrad"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="0%"
+                          stopColor={dir.stroke}
+                          stopOpacity={0.2}
+                        />
+                        <stop
+                          offset="100%"
+                          stopColor={dir.stroke}
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <XAxis
+                      dataKey="time"
+                      tick={{ fontSize: 10, fill: "#6b7280" }}
+                      tickLine={false}
+                      axisLine={false}
+                      interval={7}
+                    />
+                    <YAxis
+                      domain={["auto", "auto"]}
+                      tick={{ fontSize: 10, fill: "#6b7280" }}
+                      tickLine={false}
+                      axisLine={false}
+                      tickFormatter={(v: number) =>
+                        v < 10 ? v.toFixed(3) : v.toLocaleString()
+                      }
+                      width={65}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        background: "#1a1d27",
+                        border: "1px solid #2a2e3a",
+                        borderRadius: "8px",
+                        fontSize: "12px",
+                      }}
+                      labelStyle={{ color: "#6b7280" }}
+                      itemStyle={{ color: "#e5e7eb" }}
+                    />
+                    <ReferenceLine
+                      y={signal.entryPrice}
+                      stroke="#3b82f6"
+                      strokeDasharray="4 4"
+                      strokeWidth={1}
+                    />
+                    <ReferenceLine
+                      y={signal.targetPrice}
+                      stroke="#22c55e"
+                      strokeDasharray="4 4"
+                      strokeWidth={1}
+                    />
+                    <ReferenceLine
+                      y={signal.stopLoss}
+                      stroke="#ef4444"
+                      strokeDasharray="4 4"
+                      strokeWidth={1}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="price"
+                      stroke={dir.stroke}
+                      strokeWidth={2}
+                      fill="url(#chartGrad)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full w-full rounded-xl bg-background/60" />
+              )}
             </div>
             <div className="flex items-center gap-6 mt-3 text-xs text-muted">
               <div className="flex items-center gap-1.5">
