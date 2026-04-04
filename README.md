@@ -2,7 +2,22 @@
 
 **AI agents that turn your trading intuition into 24/7 automated market intelligence.**
 
-Built at the [HAC HACathon 2026](https://www.aivalley.io/hackathons/vibe-coding-hacathon-building-ai-for-finance) — Building AI for Finance with Lovable × n8n × MiniMax.
+🏆 **Finalist (Top 10 / 40)** — [HAC HACathon 2026](https://www.aivalley.io/hackathons/vibe-coding-hacathon-building-ai-for-finance) "Building AI for Finance"
+
+> **The twist:** This entire project — code, GitHub repo, and hackathon submission — was built and submitted autonomously by an AI agent in under 30 minutes. [Read the full story →](#-the-story)
+
+---
+
+## 📸 Screenshots
+
+### Dashboard — Signal Feed + Market Overview
+![Dashboard](docs/screenshots/dashboard.jpg)
+
+### Agent Builder — Create Trading Agents in Natural Language
+![Agent Builder](docs/screenshots/agent-builder.png)
+
+### Signal Detail — Full Analysis with Chart + AI Narrative
+![Signal Detail](docs/screenshots/signal-detail.png)
 
 ---
 
@@ -38,7 +53,7 @@ Create trading agents with natural language instructions. Configure:
 - Alert preferences
 
 ### 📈 Structured Signal Cards
-Every analysis outputs precise, machine-readable signals — not just "buy" or "sell":
+Every analysis outputs precise, machine-readable signals:
 - **Entry / Target / Stop-Loss** prices
 - **Confidence score** (65-95%)
 - **Risk/Reward ratio** visualization
@@ -46,16 +61,51 @@ Every analysis outputs precise, machine-readable signals — not just "buy" or "
 - **Key indicators** panel with current values
 
 ### 🔔 Multi-Channel Alerts
-Get notified when signals fire:
 - Web push notifications
 - Email digests
 - Telegram bridge
 
 ### 🌐 Community Layer
-Publish high-conviction analyses as public ideas:
-- Signal cards with screenshots
-- Strategy labels and direction indicators
-- Engagement metrics (likes, comments)
+Publish high-conviction analyses as public ideas with signal cards, strategy labels, and engagement metrics.
+
+---
+
+## 📖 The Story
+
+### An AI Agent Built This Project in 30 Minutes — and Made Finalist
+
+On April 3, 2026, at the HAC HACathon (Hanwha AI Center × AI Valley × Lovable × n8n × MiniMax) in San Francisco, I was on a 4-person team building an expense auditing tool.
+
+**About one hour before the deadline**, I messaged my AI agent on Telegram:
+
+> "Can we use our trading platform spec to enter this hackathon?"
+
+What followed:
+
+| Time | What the AI Agent Did |
+|------|----------------------|
+| T+0 min | Read the product spec documents |
+| T+2 min | Spawned a coding sub-agent to build the Next.js app |
+| T+15 min | Logged into the submission portal (4 email verification attempts 😅) |
+| T+23 min | **First submission — placeholder to secure the deadline** |
+| T+31 min | Created GitHub repo, pushed code |
+| T+33 min | **Updated submission with real GitHub link** |
+| T+38 min | Code complete: 3 pages, 1,984 lines TypeScript, build passing ✅ |
+
+**Result:**
+- ✅ SignalForge AI → **Finalist, Top 10 out of 40 teams**
+- ❌ My 4-person team (full day, in-person) → Did not make Finalist
+
+The agent handled everything end-to-end: reading specs, writing code, creating the GitHub repo, logging into the submission portal, filling out forms, and clicking Submit. I provided credentials and verification codes.
+
+**The irony:** During the final presentation, I didn't know the agent had built 3 complete UI pages — I only showed the GitHub README. If I'd shown the actual UI screenshots above, the ranking could have been higher.
+
+### Lessons Learned
+
+1. **Spec-first pays off** — Having a product spec ready meant the agent could execute immediately
+2. **AI can handle end-to-end submission** — Not just code, but browser automation, form filling, repo management
+3. **Always have a live demo** — Our biggest gap vs the winners
+4. **Communication matters** — The agent should have proactively sent screenshots
 
 ---
 
@@ -64,15 +114,15 @@ Publish high-conviction analyses as public ideas:
 ```
 ┌─────────────────────────────────────────────┐
 │                 Frontend                     │
-│  Next.js + TypeScript + Tailwind + shadcn/ui │
+│  Next.js 14 + TypeScript + Tailwind + shadcn │
 ├─────────────────────────────────────────────┤
 │              Agent Engine                    │
 │  Strategy Templates → Prompt Compiler →      │
 │  Multi-Provider Inference (Claude/Gemini)    │
 ├─────────────────────────────────────────────┤
 │            Signal Pipeline                   │
-│  Structured Output Validator → Signal Cards  │
-│  → Feed Manager → Alert Dispatcher           │
+│  Structured Output → Signal Cards →          │
+│  Feed Manager → Alert Dispatcher             │
 ├─────────────────────────────────────────────┤
 │           Data Layer                         │
 │  Market Data APIs → Chart Context Assembly   │
@@ -85,14 +135,9 @@ Publish high-conviction analyses as public ideas:
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repo
 git clone https://github.com/QihongRuan/signalforge-ai.git
 cd signalforge-ai
-
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
 
@@ -122,7 +167,6 @@ signalforge/
 │   ├── app/
 │   │   ├── page.tsx              # Dashboard — signal feed + market overview
 │   │   ├── layout.tsx            # Root layout with dark theme
-│   │   ├── globals.css           # Global styles
 │   │   ├── agents/
 │   │   │   └── create/page.tsx   # Agent Builder + My Agents
 │   │   └── signals/
@@ -131,17 +175,14 @@ signalforge/
 │   │   ├── Header.tsx            # Navigation + branding
 │   │   ├── Footer.tsx            # HAC HACathon credit
 │   │   ├── MarketOverview.tsx    # Market stats + sparklines
-│   │   ├── SignalCard.tsx        # Individual signal card component
-│   │   ├── SummaryStats.tsx      # Aggregate signal statistics
-│   │   └── ui/
-│   │       └── button.tsx        # shadcn/ui button
+│   │   ├── SignalCard.tsx        # Individual signal card
+│   │   ├── SummaryStats.tsx      # Aggregate statistics
+│   │   └── ui/button.tsx         # shadcn/ui button
 │   └── lib/
 │       ├── data.ts               # Mock data (18 signals, 10+ assets)
 │       └── utils.ts              # Utility functions
-├── components.json               # shadcn/ui config
-├── tailwind.config.ts
-├── next.config.ts
-└── package.json
+└── docs/
+    └── screenshots/              # UI screenshots
 ```
 
 ---
@@ -154,16 +195,17 @@ signalforge/
 | Structured Output | ❌ Prose only | ✅ Structured | ✅ Signal cards with E/T/S |
 | Multi-Asset | ⚠️ Limited | ✅ Full | ✅ 13,000+ instruments |
 | Cost | 💰 Free-ish | 💰💰💰 $$$$ | 💰 Accessible |
-| AI Provider | ⚠️ Single | ⚠️ Locked-in | ✅ Multi-provider |
 | Code Required | ✅ Yes | ✅ Yes | ❌ **No code needed** |
 
 ---
 
-## 👤 Team
+## 👤 Author
 
-**Qihong Ruan** — Cornell PhD, Quantitative Finance Researcher  
-Deep expertise in market microstructure, cross-asset analysis, and high-frequency data.  
-Infrastructure: TAQ, WRDS, Kaiko, Interactive Brokers.
+**[Qihong Ruan](https://www.linkedin.com/in/qihong-ruan)** — Cornell PhD, Quantitative Finance Researcher
+
+Deep expertise in market microstructure, cross-asset analysis, and high-frequency data.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Qihong_Ruan-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/qihong-ruan)
 
 ---
 
@@ -175,5 +217,6 @@ MIT
 
 <p align="center">
   <strong>⚡ SignalForge AI</strong><br>
-  Built at HAC HACathon 2026 — Building AI for Finance
+  Finalist — HAC HACathon 2026 "Building AI for Finance"<br>
+  <em>Built by an AI agent. In 30 minutes. And it made the finals.</em>
 </p>
