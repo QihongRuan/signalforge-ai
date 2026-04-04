@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 hackathon_archive/repos/
 hackathon_archive/
+AGENTS.md
+CLAUDE.md
